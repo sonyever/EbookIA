@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-996806782"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'AW-996806782');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dominando a IA com Prompts Eficazes - Ebook Completo</title>
@@ -20,14 +11,12 @@
             --primary-blue: #0066ff;
             --secondary-purple: #6600cc;
             --accent-green: #00ff88;
-            --accent-orange: #ff6600;
             --background-dark: #0a0a0f;
             --background-secondary: #1a1a2e;
             --text-light: #ffffff;
             --text-gray: #cccccc;
             --gradient-primary: linear-gradient(45deg, var(--primary-cyan), var(--primary-magenta));
             --gradient-secondary: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
-            --gradient-neural: linear-gradient(45deg, #00ffff, #ff00ff, #00ff88, #ff6600);
         }
 
         * {
@@ -46,345 +35,115 @@
             position: relative;
         }
 
-        /* Neural Network Particles Canvas */
-        #neuralCanvas {
+        /* Floating shapes animation */
+        .floating-shape {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
             z-index: -1;
-            opacity: 0.3;
         }
 
-        /* Advanced Grid with Neural Patterns */
-        .neural-grid {
+        .shape1 {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            top: 60%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+
+        .shape3 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent-green), var(--primary-blue));
+            bottom: 30%;
+            left: 70%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        /* Grid lines background */
+        .grid-lines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, rgba(255, 0, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
-            background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -2;
-            animation: neuralPulse 8s ease-in-out infinite;
+            animation: gridMove 30s linear infinite;
         }
 
-        @keyframes neuralPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.02); }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
-        /* Holographic Progress Bar */
+        /* Progress bar */
         .progress-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: rgba(0, 0, 0, 0.8);
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, 
-                var(--primary-cyan) 0%, 
-                var(--primary-magenta) 25%, 
-                var(--accent-green) 50%, 
-                var(--accent-orange) 75%, 
-                var(--primary-cyan) 100%);
+            background: var(--gradient-primary);
             width: 0%;
             transition: width 0.3s ease;
-            position: relative;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 20px;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
-            animation: progressGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes progressGlow {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Digital Text Effect */
-        .digital-text {
-            font-family: 'Courier New', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .digital-text::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-dark);
-            color: var(--primary-cyan);
-            animation: digitalReveal 3s ease-out forwards;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        @keyframes digitalReveal {
-            0% { width: 0; }
-            70% { width: 100%; }
-            100% { width: 100%; background: transparent; }
-        }
-
-        /* Holographic Cards */
-        .holo-card {
-            background: rgba(26, 26, 46, 0.4);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: all 0.4s ease;
-        }
-
-        .holo-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(0, 255, 255, 0.1) 50%, 
-                transparent 70%);
-            transform: rotate(45deg);
-            animation: holoScan 4s linear infinite;
-        }
-
-        .holo-card:hover {
-            transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
-            border-color: var(--primary-cyan);
-            box-shadow: 
-                0 20px 40px rgba(0, 255, 255, 0.2),
-                inset 0 0 20px rgba(0, 255, 255, 0.1);
-        }
-
-        @keyframes holoScan {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        /* AI Processing Indicators */
-        .ai-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--accent-green);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin: 0.5rem 0;
-        }
-
-        .ai-pulse {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: aiPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes aiPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(1.5); }
-        }
-
-        /* Quantum Button Effects */
-        .quantum-btn {
-            position: relative;
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: transparent;
-            border: 2px solid var(--primary-cyan);
-            border-radius: 50px;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: bold;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .quantum-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: left 0.5s ease;
-            z-index: -1;
-        }
-
-        .quantum-btn:hover::before {
-            left: 0;
-        }
-
-        .quantum-btn:hover {
-            color: var(--background-dark);
-            border-color: var(--primary-magenta);
-            box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.5),
-                inset 0 0 30px rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Data Visualization */
-        .data-viz {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-            align-items: end;
-            height: 60px;
-        }
-
-        .data-bar {
-            flex: 1;
-            background: linear-gradient(to top, var(--primary-blue), var(--primary-cyan));
-            border-radius: 4px 4px 0 0;
-            animation: dataGrow 2s ease-out forwards;
-            position: relative;
-        }
-
-        .data-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.8);
-            animation: dataScan 3s ease-in-out infinite;
-        }
-
-        @keyframes dataGrow {
-            from { height: 0; }
-        }
-
-        @keyframes dataScan {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Matrix Rain Effect */
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        /* Header Enhancements */
+        /* Header */
         .header {
             text-align: center;
             padding: 4rem 1rem;
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.95), 
-                rgba(26, 26, 46, 0.95));
-            backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, 
-                rgba(0, 255, 255, 0.1) 0%, 
-                transparent 70%);
-            animation: headerPulse 6s ease-in-out infinite;
-        }
-
-        @keyframes headerPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
         }
 
         .ebook-badge {
             display: inline-block;
-            padding: 0.8rem 2rem;
+            padding: 0.5rem 1.5rem;
             background: var(--gradient-primary);
             color: var(--background-dark);
             border-radius: 25px;
             font-weight: bold;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ebook-badge::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-            animation: badgeShine 3s ease-in-out infinite;
-        }
-
-        @keyframes badgeShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
 
         .main-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 300;
-            background: var(--gradient-neural);
-            background-size: 400% 400%;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.2;
-            animation: gradientShift 4s ease-in-out infinite;
-            position: relative;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         .subtitle {
@@ -392,125 +151,74 @@
             color: var(--text-gray);
             max-width: 800px;
             margin: 0 auto 2rem;
-            position: relative;
         }
 
-        /* Enhanced Stats Section */
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            position: relative;
-        }
-
-        .stat-item {
-            text-align: center;
-            position: relative;
-            padding: 1rem;
-            border-radius: 10px;
-            background: rgba(0, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            background: rgba(0, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
+        .price-highlight {
+            font-size: 2rem;
+            color: var(--accent-green);
             font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            animation: countUp 2s ease-out;
+            margin: 1rem 0;
         }
 
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            margin-right: 1rem;
         }
 
-        /* Enhanced Content Sections */
+        /* Content */
         .content {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
-            position: relative;
         }
 
         .section {
-            margin-bottom: 4rem;
-            padding: 2.5rem;
-            background: rgba(26, 26, 46, 0.4);
-            border-radius: 20px;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(26, 26, 46, 0.3);
+            border-radius: 15px;
             border: 1px solid rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--gradient-primary);
-            animation: sectionGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes sectionGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            backdrop-filter: blur(10px);
         }
 
         .section h2 {
-            font-size: 2.2rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-bottom: 1rem;
+            font-size: 2rem;
+            color: var(--primary-cyan);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-cyan);
+            padding-bottom: 0.5rem;
         }
 
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
+        .section h3 {
+            font-size: 1.4rem;
+            color: var(--accent-green);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
-        /* Enhanced Chapter Cards */
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Chapter Grid */
         .chapters-grid {
             display: grid;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .chapter-card {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.4s ease;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
         }
 
         .chapter-card::before {
@@ -521,62 +229,122 @@
             width: 4px;
             height: 100%;
             background: var(--gradient-primary);
-            transition: width 0.3s ease;
-        }
-
-        .chapter-card:hover::before {
-            width: 8px;
         }
 
         .chapter-card:hover {
-            transform: translateY(-8px) rotateX(2deg);
+            transform: translateY(-5px);
             border-color: var(--primary-cyan);
-            box-shadow: 
-                0 15px 40px rgba(0, 255, 255, 0.3),
-                inset 0 0 20px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
 
         .chapter-number {
             display: inline-block;
             background: var(--gradient-secondary);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            color: var(--primary-cyan);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .chapter-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .chapter-topics {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chapter-topics ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter-topics li {
+            color: var(--text-gray);
+            margin-bottom: 0.3rem;
+            padding-left: 1rem;
             position: relative;
-            overflow: hidden;
         }
 
-        .chapter-number::after {
-            content: '';
+        .chapter-topics li::before {
+            content: '▶';
+            color: var(--accent-green);
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
-            animation: numberShine 2s ease-in-out infinite;
+            left: 0;
+            font-size: 0.8rem;
         }
 
-        @keyframes numberShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
-        /* Enhanced CTA Section */
+        .benefit-card {
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--primary-magenta);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .benefit-title {
+            color: var(--primary-magenta);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Resources Section */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .resource-title {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, 
-                rgba(0, 102, 255, 0.3), 
-                rgba(255, 0, 200, 0.3));
-            border: 3px solid var(--primary-cyan);
-            border-radius: 25px;
-            padding: 4rem 3rem;
-            margin-top: 4rem;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(255, 0, 200, 0.2));
+            border: 2px solid var(--primary-cyan);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
             position: relative;
             overflow: hidden;
         }
@@ -588,196 +356,99 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent,
-                rgba(0, 255, 255, 0.1),
-                transparent,
-                rgba(255, 0, 255, 0.1),
-                transparent
-            );
-            animation: ctaRotate 8s linear infinite;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
         }
 
-        @keyframes ctaRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .cta-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cta-left {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .cta-title {
-            font-size: 3rem;
-            background: var(--gradient-neural);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0;
-            animation: gradientShift 4s ease-in-out infinite;
-            line-height: 1.2;
+            font-size: 2.5rem;
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-description {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .cta-benefits {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .benefit-item:hover {
-            background: rgba(0, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .benefit-icon {
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .cta-right {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .price-container {
-            position: relative;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--accent-green);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        .price-old {
             font-size: 1.2rem;
-            color: var(--text-gray);
-            text-decoration: line-through;
-            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .price-current {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--accent-green);
-            text-shadow: 0 0 20px var(--accent-green);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
+        .cta-button {
+            display: inline-block;
             background: var(--gradient-primary);
             color: var(--background-dark);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
             font-weight: bold;
-            font-size: 0.9rem;
-            animation: badgeShine 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
         }
 
-        .cta-ai-indicator {
-            margin: 0;
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
+            background: linear-gradient(45deg, var(--primary-magenta), var(--primary-cyan));
         }
 
-        .cta-quantum-btn {
-            font-size: 1.5rem;
-            padding: 1.5rem 3rem;
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-        }
-
-        .guarantee-box {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
+        .guarantee {
+            margin-top: 2rem;
+            padding: 1rem;
             background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--accent-green);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .guarantee-icon {
-            font-size: 2rem;
-            color: var(--accent-green);
-            filter: drop-shadow(0 0 10px var(--accent-green));
-        }
-
-        .guarantee-content {
-            text-align: left;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .guarantee-title {
             color: var(--accent-green);
             font-weight: bold;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
         }
 
-        .guarantee-text {
-            color: var(--text-gray);
-            font-size: 0.9rem;
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .urgency-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 102, 0, 0.1);
-            border: 1px solid var(--accent-orange);
-            border-radius: 20px;
-            color: var(--accent-orange);
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
             font-weight: bold;
+            color: var(--accent-green);
+            display: block;
         }
 
-        .urgency-pulse {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-orange);
-            border-radius: 50%;
-            animation: aiPulse 1s ease-in-out infinite;
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             .content {
                 padding: 1rem;
@@ -788,127 +459,131 @@
                 margin-bottom: 2rem;
             }
 
-            .holo-card:hover {
-                transform: translateY(-5px);
-            }
-
-            .main-title {
-                font-size: 2.5rem;
-            }
-
-            .cta-title {
-                font-size: 2rem;
-            }
-
-            .cta-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .cta-benefits {
+            .benefits-grid,
+            .resources-grid {
                 grid-template-columns: 1fr;
             }
 
             .cta-section {
                 padding: 2rem 1rem;
             }
-
-            .price-container {
-                max-width: 250px;
-            }
-
-            .guarantee-box {
-                max-width: 300px;
-            }
         }
-
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-dark);
+        /* Robot-Human Interaction Animation */
+        .interaction-container {
+            position: relative;
+            height: 150px;
+            margin: 2rem 0;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease;
         }
 
-        .loading-spinner {
+        .human-icon, .robot-icon {
             width: 80px;
             height: 80px;
-            border: 3px solid rgba(0, 255, 255, 0.3);
-            border-top: 3px solid var(--primary-cyan);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            transition: transform 3s ease-in-out;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .human-icon {
+            transform: translateX(0);
+        }
+
+        .robot-icon {
+            transform: translateX(0);
+        }
+
+        .interaction-active .human-icon {
+            transform: translateX(200px);
+        }
+
+        .interaction-active .robot-icon {
+            transform: translateX(-200px);
+        }
+
+        /* Enhanced floating shapes as mini-robots */
+        .floating-robot {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 20% 30% 20% 30%;
+            opacity: 0.2;
+            animation: floatAndRotate 15s infinite linear;
+            z-index: -1;
+        }
+
+        .floating-robot::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .floating-robot::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            width: 10px;
+            height: 15px;
+            background: #fff;
+            border-radius: 0 0 50% 50%;
+        }
+
+        @keyframes floatAndRotate {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(90deg); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(-10px) rotate(270deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <!-- Neural Network Background -->
-    <canvas id="neuralCanvas"></canvas>
-    <div class="neural-grid"></div>
-    <div class="matrix-rain" id="matrixRain"></div>
+    <div class="grid-lines"></div>
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
 
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <header class="header">
-        <div class="ebook-badge">
-            <span class="ai-pulse"></span>
-            Ebook Completo Powered by IA
+        <div class="ebook-badge">Ebook Completo</div>
+        <h1 class="main-title">Dominando a IA com Prompts Eficazes</h1>
+        <p class="subtitle">Do Iniciante ao Avançado para todos que queiram ser Profissionais de TI em váreas áreas de atuação </p>
+        <div class="interaction-container" id="interaction">
+            <!-- Human Icon SVG -->
+            <svg class="human-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="30" r="20" fill="#ffcc00" stroke="#fff" stroke-width="2"/>
+                <rect x="40" y="50" width="20" height="30" fill="#ffcc00" rx="10"/>
+                <line x1="45" y1="55" x2="45" y2="65" stroke="#fff" stroke-width="2"/>
+                <line x1="55" y1="55" x2="55" y2="65" stroke="#fff" stroke-width="2"/>
+                <path d="M40 80 Q50 90 60 80" stroke="#ffcc00" stroke-width="4" fill="none"/>
+            </svg>
+
+            <!-- Robot Icon SVG -->
+            <svg class="robot-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="20" width="40" height="20" fill="#00ffff" stroke="#fff" stroke-width="2" rx="5"/>
+                <circle cx="40" cy="30" r="5" fill="#ff00ff"/>
+                <circle cx="60" cy="30" r="5" fill="#ff00ff"/>
+                <rect x="25" y="45" width="50" height="25" fill="#00ffff" rx="5"/>
+                <rect x="35" y="70" width="30" height="20" fill="#00ffff" rx="3"/>
+                <line x1="20" y1="75" x2="25" y2="75" stroke="#fff" stroke-width="3"/>
+                <line x1="75" y1="75" x2="80" y2="75" stroke="#fff" stroke-width="3"/>
+            </svg>
         </div>
-        <h1 class="main-title digital-text" data-text="Dominando a IA com Prompts Eficazes">
-            Dominando a IA com Prompts Eficazes
-        </h1>
-        <p class="subtitle">Do Básico ao Avançado para Profissionais de TI</p>
-        
-        <div class="ai-indicator">
-            <span class="ai-pulse"></span>
-            IA Processando Conhecimento...
-        </div>
-        
-        <div class="data-viz">
-            <div class="data-bar" style="height: 40px;"></div>
-            <div class="data-bar" style="height: 60px;"></div>
-            <div class="data-bar" style="height: 35px;"></div>
-            <div class="data-bar" style="height: 55px;"></div>
-            <div class="data-bar" style="height: 45px;"></div>
-        </div>
-        
-        <div style="margin: 2rem 0;">
-            <span style="color: var(--text-gray); text-decoration: line-through; font-size: 1.5rem; margin-right: 1rem;">R$ 67,00</span>
-            <span style="color: var(--accent-green); font-size: 2.5rem; font-weight: bold;">R$ 37,00</span>
-        </div>
-        <p style="color: var(--accent-green); font-weight: bold; margin-top: 1rem;">
-            ⏰ Promoção de Lançamento - Desconto por Tempo Limitado!
-        </p>
     </header>
 
     <main class="content">
-        <section class="section holo-card">
-            <h2>🤖 Visão Geral do Ebook</h2>
+        <section class="section">
+            <h2>📖 Visão Geral do Ebook</h2>
             <p>Este ebook foi estruturado para atender às necessidades de iniciantes em IA, especialmente aqueles com conhecimento em informática que desejam aprender sobre inteligência artificial e criação de prompts. A estrutura progride de conceitos básicos para aplicações mais avançadas, permitindo que o leitor construa seu conhecimento gradualmente.</p>
-
-            <div class="ai-indicator">
-                <span class="ai-pulse"></span>
-                Conteúdo Otimizado por IA Avançada
-            </div>
 
             <p>Com <strong>10 capítulos abrangentes</strong>, você vai desde os fundamentos da IA até técnicas avançadas de prompt engineering, com aplicações práticas para profissionais de TI.</p>
 
@@ -933,410 +608,341 @@
         </section>
 
         <section class="section">
-            <h2>🧠 Estrutura Completa dos Capítulos</h2>
+            <h2>📚 Estrutura Completa dos Capítulos</h2>
 
             <div class="chapters-grid">
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 1</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Fundamentos da Inteligência Artificial
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Compreenda os conceitos básicos da IA, sua história e como os modelos de linguagem funcionam.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Base Fundamental para IA
+                    <div class="chapter-title">Fundamentos da Inteligência Artificial</div>
+                    <div class="chapter-description">Compreenda os conceitos básicos da IA, sua história e como os modelos de linguagem funcionam.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Introdução à IA: O que é e como funciona</li>
+                            <li>Breve história da IA e sua evolução</li>
+                            <li>Tipos de IA: Estreita vs. Geral</li>
+                            <li>Modelos de linguagem grandes (LLMs)</li>
+                            <li>Principais ferramentas disponíveis</li>
+                            <li>Limitações e considerações éticas</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 2</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        A Arte e Ciência da Criação de Prompts
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Aprenda a anatomia de um prompt eficaz e domine os conceitos fundamentais de prompt engineering.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Técnicas Avançadas de Prompt
+                    <div class="chapter-title">A Arte e Ciência da Criação de Prompts</div>
+                    <div class="chapter-description">Aprenda a anatomia de um prompt eficaz e domine os conceitos fundamentais de prompt engineering.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>O que são prompts e sua importância</li>
+                            <li>Anatomia de um prompt eficaz</li>
+                            <li>Prompts básicos vs. avançados</li>
+                            <li>Como as IAs interpretam prompts</li>
+                            <li>Conceito de engenharia de prompts</li>
+                            <li>Erros comuns e como evitá-los</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 3</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Prompts para Tarefas Específicas
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Técnicas fundamentais para criar prompts claros, específicos e eficazes para diferentes necessidades.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Aplicação Prática Imediata
+                    <div class="chapter-title">Prompts para Tarefas Específicas</div>
+                    <div class="chapter-description">Técnicas fundamentais para criar prompts claros, específicos e eficazes para diferentes necessidades.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Princípios de clareza e especificidade</li>
+                            <li>Estruturação com contexto adequado</li>
+                            <li>Instruções passo a passo</li>
+                            <li>Técnicas de refinamento iterativo</li>
+                            <li>Formatação e organização</li>
+                            <li>Exemplos práticos de antes e depois</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 4</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Prompts para Produtividade e Suporte Técnico
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Automatize tarefas repetitivas e melhore o suporte técnico com prompts especializados.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Automação Inteligente
+                    <div class="chapter-title">Prompts para Produtividade e Suporte Técnico</div>
+                    <div class="chapter-description">Automatize tarefas repetitivas e melhore o suporte técnico com prompts especializados.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Automação de tarefas repetitivas</li>
+                            <li>Criação de documentação técnica</li>
+                            <li>Resolução de problemas de TI</li>
+                            <li>Análise de logs e diagnóstico</li>
+                            <li>Geração de scripts e automações</li>
+                            <li>Casos específicos para helpdesk</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 5</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Prompts para Criação de Conteúdo
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Domine a criação e otimização de conteúdo técnico e comercial com IA.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Criatividade Amplificada
+                    <div class="chapter-title">Prompts para Criação de Conteúdo</div>
+                    <div class="chapter-description">Domine a criação e otimização de conteúdo técnico e comercial com IA.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Geração de textos técnicos</li>
+                            <li>Criação de tutoriais e manuais</li>
+                            <li>Adaptação para diferentes públicos</li>
+                            <li>Revisão e aprimoramento de textos</li>
+                            <li>SEO e otimização de conteúdo</li>
+                            <li>Prompts para conteúdo visual</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 6</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Prompts para Análise e Processamento de Dados
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Transforme dados brutos em insights acionáveis usando o poder da IA.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Inteligência de Dados
+                    <div class="chapter-title">Prompts para Análise e Processamento de Dados</div>
+                    <div class="chapter-description">Transforme dados brutos em insights acionáveis usando o poder da IA.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Extração de insights de dados</li>
+                            <li>Formatação e limpeza de dados</li>
+                            <li>Criação de relatórios e dashboards</li>
+                            <li>Análise de tendências e padrões</li>
+                            <li>Visualização de dados com IA</li>
+                            <li>Integração com ferramentas de BI</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 7</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Prompts Avançados e Técnicas de Especialista
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Técnicas avançadas que separam iniciantes de especialistas em prompt engineering.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Nível Expert Desbloqueado
+                    <div class="chapter-title">Prompts Avançados e Técnicas de Especialista</div>
+                    <div class="chapter-description">Técnicas avançadas que separam iniciantes de especialistas em prompt engineering.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Chain-of-thought (cadeia de pensamento)</li>
+                            <li>Few-shot learning (poucos exemplos)</li>
+                            <li>Prompts com restrições específicas</li>
+                            <li>Técnicas de role-playing</li>
+                            <li>Prompts para tarefas criativas</li>
+                            <li>Combinação de múltiplas técnicas</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 8</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Aplicações Práticas em Diferentes Setores
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Veja como aplicar prompts em diversos setores e contextos profissionais.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Casos Reais de Sucesso
+                    <div class="chapter-title">Aplicações Práticas em Diferentes Setores</div>
+                    <div class="chapter-description">Veja como aplicar prompts em diversos setores e contextos profissionais.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>IA no suporte ao cliente</li>
+                            <li>Aplicações em desenvolvimento</li>
+                            <li>Uso em marketing e vendas</li>
+                            <li>Aplicações educacionais</li>
+                            <li>IA na gestão de projetos</li>
+                            <li>Casos de estudo reais</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 9</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        Construindo sua Biblioteca de Prompts
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Organize e gerencie seus prompts de forma profissional e eficiente.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Sistema Organizado
+                    <div class="chapter-title">Construindo sua Biblioteca de Prompts</div>
+                    <div class="chapter-description">Organize e gerencie seus prompts de forma profissional e eficiente.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Organização e categorização</li>
+                            <li>Criação de templates reutilizáveis</li>
+                            <li>Adaptação para diferentes ferramentas</li>
+                            <li>Versionamento e iteração</li>
+                            <li>Compartilhamento e colaboração</li>
+                            <li>Ferramentas para gerenciamento</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="chapter-card holo-card">
+                <div class="chapter-card">
                     <div class="chapter-number">Capítulo 10</div>
-                    <div style="color: var(--primary-cyan); font-size: 1.4rem; font-weight: bold; margin-bottom: 1rem;">
-                        O Futuro da IA e dos Prompts
-                    </div>
-                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                        Prepare-se para as tendências emergentes e oportunidades futuras em IA.
-                    </p>
-                    <div class="ai-indicator">
-                        <span class="ai-pulse"></span>
-                        Visão do Futuro
+                    <div class="chapter-title">O Futuro da IA e dos Prompts</div>
+                    <div class="chapter-description">Prepare-se para as tendências emergentes e oportunidades futuras em IA.</div>
+                    <div class="chapter-topics">
+                        <ul>
+                            <li>Tendências emergentes em IA</li>
+                            <li>Evolução dos modelos de linguagem</li>
+                            <li>Novas aplicações e possibilidades</li>
+                            <li>Preparação para mudanças</li>
+                            <li>Oportunidades de carreira</li>
+                            <li>Recursos para aprendizado contínuo</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="cta-section">
-            <div class="cta-content">
-                <div class="cta-left">
-                    <h2 class="cta-title">🚀 Transforme seu Futuro com IA</h2>
-                    <p class="cta-description">
-                        Não perca a oportunidade de dominar a tecnologia que está revolucionando o mundo!
-                    </p>
-                    
-                    <div class="cta-benefits">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">⚡</span>
-                            <span>Acesso Imediato</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">📚</span>
-                            <span>10 Capítulos Completos</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🎯</span>
-                            <span>50+ Prompts Prontos</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🛡️</span>
-                            <span>Garantia de 7 Dias</span>
-                        </div>
-                    </div>
+        <section class="section">
+            <h2>🎁 Recursos Adicionais Inclusos</h2>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-title">📋 Apêndice A: Biblioteca de Prompts</div>
+                    <ul>
+                        <li>50+ prompts categorizados por função</li>
+                        <li>Templates para diferentes necessidades</li>
+                        <li>Exemplos práticos para cada capítulo</li>
+                    </ul>
                 </div>
-                
-                <div class="cta-right">
-                    <div class="price-container">
-                        <div class="price-old">R$ 67,00</div>
-                        <div class="price-current">R$ 37,00</div>
-                        <div class="discount-badge">45% OFF</div>
-                    </div>
-                    
-                    <div class="ai-indicator cta-ai-indicator">
-                        <span class="ai-pulse"></span>
-                        IA Processando Oferta Especial...
-                    </div>
-                    
-                    <a href="#" onclick="handlePurchase()" class="quantum-btn cta-quantum-btn">
-                        CLIQUE AQUI PARA INVESTIR NO SEU SUCESSO!
-                    </a>
-                    
-                    <div class="guarantee-box">
-                        <div class="guarantee-icon">🛡️</div>
-                        <div class="guarantee-content">
-                            <div class="guarantee-title">Garantia Total de 7 dias</div>
-                            <div class="guarantee-text">Satisfação garantida, Seu investimento dará muitos frutos!</div>
-                        </div>
-                    </div>
-                    
-                    <div class="urgency-indicator">
-                        <span class="urgency-pulse"></span>
-                        ⏰ Promoção por Tempo Limitado
-                    </div>
+
+                <div class="resource-card">
+                    <div class="resource-title">📖 Apêndice B: Glossário Completo</div>
+                    <ul>
+                        <li>Definições de termos técnicos de IA</li>
+                        <li>Explicação de conceitos avançados</li>
+                        <li>Siglas e abreviações comuns</li>
+                    </ul>
                 </div>
+
+                <div class="resource-card">
+                    <div class="resource-title">🛠️ Apêndice C: Ferramentas e Recursos</div>
+                    <ul>
+                        <li>Lista de ferramentas de IA disponíveis</li>
+                        <li>Recursos online para aprendizado</li>
+                        <li>Comunidades e fóruns recomendados</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Por que Este Ebook é Diferente?</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="benefit-icon">🚀</span>
+                    <div class="benefit-title">Foco Prático</div>
+                    <p>Exemplos reais e aplicáveis no dia a dia de profissionais de TI, não apenas teoria.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <span class="benefit-icon">📈</span>
+                    <div class="benefit-title">Progressão Gradual</div>
+                    <p>Do básico ao avançado, permitindo aprendizado sólido e consistente.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <span class="benefit-icon">💼</span>
+                    <div class="benefit-title">Casos Reais</div>
+                    <p>Aplicações práticas em helpdesk, suporte técnico e análise de dados.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <span class="benefit-icon">🔧</span>
+                    <div class="benefit-title">Templates Prontos</div>
+                    <p>Prompts testados e validados que você pode usar imediatamente.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <span class="benefit-icon">🎯</span>
+                    <div class="benefit-title">Técnicas Avançadas</div>
+                    <p>Chain-of-thought, few-shot learning e outras técnicas de especialista.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <span class="benefit-icon">📚</span>
+                    <div class="benefit-title">Conteúdo Atualizado</div>
+                    <p>Baseado nas mais recentes descobertas em engenharia de prompts.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <h2 class="cta-title">🎯 Transforme sua Carreira com IA</h2>
+            <p class="cta-description">
+                Domine as habilidades que estão revolucionando o mercado de trabalho.
+                Torne-se um especialista em IA e prompts e destaque-se na sua área!
+            </p>
+
+            <a href="#" class="cta-button" onclick="handlePurchase()">
+                💎 QUERO DOMINAR A IA AGORA - R$ 37,00
+            </a>
+
+            <div class="guarantee">
+                <div class="guarantee-title">🛡️ Garantia de 7 Dias</div>
+                <p>Se não ficar satisfeito, devolvemos 100% do seu dinheiro. Sem perguntas, sem complicações.</p>
+            </div>
+
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-gray);">
+                ⚡ Acesso imediato após a compra • 💳 Pagamento 100% seguro • 📱 Acesso em qualquer dispositivo
+            </p>
+        </div>
+
+        <section class="section" style="margin-top: 3rem;">
+            <h2>❓ Perguntas Frequentes</h2>
+
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem;">📱 Como recebo o ebook após a compra?</h3>
+                <p>O acesso é imediato! Após a confirmação do pagamento, você receberá um email com o link de download e acesso à plataforma.</p>
+
+                <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem; margin-top: 2rem;">🔄 O conteúdo é atualizado?</h3>
+                <p>Sim! Você terá acesso gratuito a todas as atualizações futuras do ebook por 12 meses.</p>
+
+                <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem; margin-top: 2rem;">💰 Posso usar os prompts comercialmente?</h3>
+                <p>Absolutamente! Todos os prompts e técnicas podem ser usados em projetos pessoais e profissionais sem restrições.</p>
+
+                <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem; margin-top: 2rem;">🎯 É adequado para iniciantes?</h3>
+                <p>Sim! O ebook foi estruturado para levar você do zero ao avançado, com explicações claras e exemplos práticos.</p>
             </div>
         </section>
     </main>
 
     <script>
-        // Neural Network Canvas Animation
-        class NeuralNetwork {
-            constructor(canvas) {
-                this.canvas = canvas;
-                this.ctx = canvas.getContext('2d');
-                this.particles = [];
-                this.connections = [];
-                this.mouse = { x: 0, y: 0 };
-                
-                this.resize();
-                this.init();
-                this.animate();
-                
-                window.addEventListener('resize', () => this.resize());
-                window.addEventListener('mousemove', (e) => {
-                    this.mouse.x = e.clientX;
-                    this.mouse.y = e.clientY;
-                });
-            }
-            
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-            
-            init() {
-                this.particles = [];
-                const particleCount = Math.min(50, Math.floor(window.innerWidth / 30));
-                
-                for (let i = 0; i < particleCount; i++) {
-                    this.particles.push({
-                        x: Math.random() * this.canvas.width,
-                        y: Math.random() * this.canvas.height,
-                        vx: (Math.random() - 0.5) * 0.5,
-                        vy: (Math.random() - 0.5) * 0.5,
-                        size: Math.random() * 3 + 1,
-                        color: `hsl(${180 + Math.random() * 60}, 100%, 50%)`
-                    });
-                }
-            }
-            
-            animate() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                // Update particles
-                this.particles.forEach(particle => {
-                    particle.x += particle.vx;
-                    particle.y += particle.vy;
-                    
-                    if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-                    if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
-                    
-                    // Mouse interaction
-                    const dx = this.mouse.x - particle.x;
-                    const dy = this.mouse.y - particle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        particle.x += dx * 0.001;
-                        particle.y += dy * 0.001;
-                    }
-                });
-                
-                // Draw connections
-                this.particles.forEach((particle, i) => {
-                    this.particles.slice(i + 1).forEach(otherParticle => {
-                        const dx = particle.x - otherParticle.x;
-                        const dy = particle.y - otherParticle.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < 150) {
-                            this.ctx.beginPath();
-                            this.ctx.moveTo(particle.x, particle.y);
-                            this.ctx.lineTo(otherParticle.x, otherParticle.y);
-                            this.ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / 150})`;
-                            this.ctx.lineWidth = 0.5;
-                            this.ctx.stroke();
-                        }
-                    });
-                });
-                
-                // Draw particles
-                this.particles.forEach(particle => {
-                    this.ctx.beginPath();
-                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = particle.color;
-                    this.ctx.fill();
-                    
-                    // Glow effect
-                    this.ctx.shadowBlur = 10;
-                    this.ctx.shadowColor = particle.color;
-                    this.ctx.fill();
-                    this.ctx.shadowBlur = 0;
-                });
-                
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-        
-        // Matrix Rain Effect
-        class MatrixRain {
-            constructor(container) {
-                this.container = container;
-                this.characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-                this.drops = [];
-                this.init();
-            }
-            
-            init() {
-                for (let i = 0; i < 50; i++) {
-                    const drop = document.createElement('div');
-                    drop.style.position = 'absolute';
-                    drop.style.color = '#00ff00';
-                    drop.style.fontSize = '14px';
-                    drop.style.fontFamily = 'monospace';
-                    drop.style.left = Math.random() * 100 + '%';
-                    drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    drop.style.animationName = 'matrixFall';
-                    drop.style.animationIterationCount = 'infinite';
-                    drop.style.animationTimingFunction = 'linear';
-                    drop.textContent = this.characters[Math.floor(Math.random() * this.characters.length)];
-                    
-                    this.container.appendChild(drop);
-                    this.drops.push(drop);
-                }
-                
-                // Add CSS animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes matrixFall {
-                        0% { top: -20px; opacity: 1; }
-                        100% { top: 100vh; opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                // Update characters periodically
-                setInterval(() => {
-                    this.drops.forEach(drop => {
-                        drop.textContent = this.characters[Math.floor(Math.random() * this.characters.length)];
-                    });
-                }, 100);
-            }
-        }
-        
-        // Initialize everything when page loads
-        window.addEventListener('load', () => {
-            // Hide loading overlay
-            setTimeout(() => {
-                document.getElementById('loadingOverlay').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                }, 1000);
-            }, 2000);
-            
-            // Initialize neural network
-            const canvas = document.getElementById('neuralCanvas');
-            new NeuralNetwork(canvas);
-            
-            // Initialize matrix rain
-            const matrixContainer = document.getElementById('matrixRain');
-            new MatrixRain(matrixContainer);
-            
-            // Progress bar
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById('progressBar').style.width = scrolled + '%';
-            });
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
         });
-        
+
         // Purchase handler
         function handlePurchase() {
-            // Add some visual feedback
-            const btn = event.target;
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-                window.open('https://mpago.li/2KynKL1', '_blank');
-            }, 150);
+            // Redirecionamento para pagamento no Mercado Pago
+            window.open('https://mpago.la/1UAD469', '_blank');
         }
-        
-        // Enhanced hover effects
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.holo-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) rotateX(2deg) rotateY(2deg)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
-                });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Robot-Human Interaction Animation
+        window.addEventListener('load', () => {
+            const interaction = document.getElementById('interaction');
+            setTimeout(() => {
+                interaction.classList.add('interaction-active');
+            }, 1000);
+
+            // Add floating robots
+            for (let i = 0; i < 5; i++) {
+                const robot = document.createElement('div');
+                robot.className = 'floating-robot';
+                robot.style.left = Math.random() * 100 + '%';
+                robot.style.top = Math.random() * 100 + '%';
+                robot.style.animationDelay = Math.random() * 15 + 's';
+                document.body.appendChild(robot);
+            }
+        });
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.chapter-card, .benefit-card, .resource-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
             });
         });
     </script>
 </body>
 </html>
-
